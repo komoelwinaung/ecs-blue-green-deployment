@@ -1,0 +1,26 @@
+{
+    "cluster": "tutorial-bluegreen-cluster",
+    "serviceName": "service-bluegreen",
+    "taskDefinition": "tutorial-task-def",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:ap-southeast-1:461805207254:targetgroup/bluegreentarget1/0f6d6d3c707a9edb",
+            "containerName": "sample-app",
+            "containerPort": 80
+        }
+    ],
+    "launchType": "FARGATE",
+    "schedulingStrategy": "REPLICA",
+    "deploymentController": {
+        "type": "CODE_DEPLOY"
+    },
+    "platformVersion": "LATEST",
+    "networkConfiguration": {
+       "awsvpcConfiguration": {
+          "assignPublicIp": "ENABLED",
+          "securityGroups": [ "sg-8a7be2ef" ],
+          "subnets": [ "subnet-29dc504c", "subnet-5a6dc52d" ]
+       }
+    },
+    "desiredCount": 1
+}

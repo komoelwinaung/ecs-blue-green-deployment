@@ -1,0 +1,14 @@
+This testing is based on following AWS documentation.
+https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-blue-green.html#create-blue-green-loadbalancer
+
+Testing Env: Ubuntu, Visual Studio Code, AWS ap-southeast-1 region
+
+First, we will need to make sure AWS cli, ECS.
+
+Second, data collect from required informations like cluster, arn, IAM role & permission, alb, target group, S3, deployment info and other important things.
+Making sure to check AWS arn is necessary. I've got headache with this arn issue. :-) Anyway, that is great feeling.
+
+Third, run, deploy, test and check the excellent final result. After that, delete all of your testing things, I also faced inconvenience of deleting service of ECS 
+because AWS docu miss to add cluster name. Please take care it. 
+
+Enjoy and let's start it. Thank you.

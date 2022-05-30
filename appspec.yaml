@@ -1,0 +1,10 @@
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: "arn:aws:ecs:ap-southeast-1:461805207254:task-definition/tutorial-task-def:1"
+        LoadBalancerInfo:
+          ContainerName: "sample-app"
+          ContainerPort: 80
+        PlatformVersion: "LATEST"

@@ -1,0 +1,90 @@
+aws elbv2 create-load-balancer \
+     --name bluegreen-alb \
+     --subnets subnet-29luck04c subnet-5aluck2d \
+     --security-groups sg-8a7luckf \
+     --region ap-southeast-1
+
+
+     aws elbv2 create-target-group \
+     --name bluegreentarget1 \
+     --protocol HTTP \
+     --port 80 \
+     --target-type ip \
+     --vpc-id vpc-cluckad \
+     --region ap-southeast-1
+
+
+     aws elbv2 create-listener \
+     --load-balancer-arn arn:aws:elasticloadbalancing:ap-southeast-1:461luck07254:loadbalancer/app/bluegreen-alb/7a7667a649389e16 \
+     --protocol HTTP \
+     --port 80 \
+     --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:ap-southeast-1:461luck7254:targetgroup/bluegreentarget1/0f6d6d3c707a9edb \
+     --region ap-southeast-1
+
+     aws ecs create-cluster \
+     --cluster-name tutorial-bluegreen-cluster \
+     --region ap-southeast-1
+
+     aws ecs register-task-definition \
+     --cli-input-json file://fargate-task.json \
+     --region ap-southeast-1
+
+     aws ecs create-service \
+     --cli-input-json file://service-bluegreen.json \
+     --region ap-southeast-1
+
+     aws deploy create-application \
+     --application-name tutorial-bluegreen-app \
+     --compute-platform ECS \
+     --region ap-southeast-1
+
+     aws elbv2 create-target-group \
+     --name bluegreentarget2 \
+     --protocol HTTP \
+     --port 80 \
+     --target-type ip \
+     --vpc-id "vpc-c8luckad" \
+     --region ap-southeast-1
+
+     aws deploy create-deployment-group \
+     --cli-input-json file://tutorial-deployment-group.json \
+     --region ap-southeast-1
+
+     aws s3 mb s3://tutorial-bluegreen-bucket-29luck2022
+
+     aws s3 cp ./appspec.yaml s3://tutorial-bluegreen-bucket-29luck022/appspec.yaml
+
+     aws deploy create-deployment \
+     --cli-input-json file://create-deployment.json \
+     --region ap-southeast-1
+
+     aws deploy get-deployment-target \
+     --deployment-id "d-0MCLBLCCH" \
+     --target-id tutorial-bluegreen-cluster:service-bluegreen \
+     --region ap-southeast-1
+
+
+
+Delete testing env:
+
+AWS Document:
+     aws ecs delete-service \
+     --service arn:aws:ecs:ap-southeast-1:46luck207254:service/service-bluegreen \
+     --force \
+     --region ap-southeast-1
+
+Actually, we need to add cluster name, if not, it shows command error:
+
+     aws ecs delete-service \
+     --cluster tutorial-bluegreen-cluster \
+     --service arn:aws:ecs:ap-southeast-1:4luck07254:service/service-bluegreen \
+     --force \
+     --region ap-southeast-1
+
+     aws ecs deregister-task-definition --task-definitiontask_defination_name:revision_no
+
+     aws ecs list-task-definitions --region ap-southeast-1
+     aws ecs deregister-task-definition --task tutorial-task-def:1
+
+     https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-blue-green.html#create-blue-green-loadbalancer
+
